@@ -35,7 +35,7 @@ $(document).ready(function () {
     // Form submission event
     $('#searchForm2, #searchForm, .homepage-search').submit(function (event) {
         event.preventDefault();
-       
+
         $('#current-day, #five-day-forecast, .navbar, #five-day-title').show();
         $(`.homepage-search, #welcome`).hide();
 
@@ -58,11 +58,15 @@ $(document).ready(function () {
             console.log(data.list[3].dt);
             console.log(oneCallApiUrl);
             console.log(data.list[3].weather.icon);
-          
+
 
             // create a function that takes the kelvin number and turns it into celsius
             function kelvinToCelsiusRound(kelvin) {
                 return Math.round(kelvin - 273.15);
+            }
+
+            function mpsToKmph(mps) {
+                return (mps * 3.6).toFixed(2);
             }
 
 
@@ -84,23 +88,23 @@ $(document).ready(function () {
 
 
             describeWeatherFiveDay1.html(`
-<ul>
-<li><img src="http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}.png"</li> 
-  <li>Temp: ${temperaturesCelsius[0]}°C</li>
-  <li>Wind Speed: ${data.list[3].wind.speed}m/s</li>
-  <li>Wind Direction: ${data.list[3].wind.deg}°</li>
-  <li>Wind Gust: ${data.list[3].wind.gust}m/s</li>
-  <li>Humidity: ${data.list[3].main.humidity}%</li>
-</ul>
+            <ul>
+            <li><img src="http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}.png" </li> 
+            <li>Temp: ${temperaturesCelsius[0]}°C</li>
+            <li>Wind Speed: ${mpsToKmph(data.list[3].wind.speed)} km/h</li>
+            <li>Wind Direction: ${data.list[3].wind.deg}°</li>
+            <li>Wind Gust: ${mpsToKmph(data.list[3].wind.gust)} km/h</li>
+            <li>Humidity: ${data.list[3].main.humidity}%</li>
+        </ul>
 `);
 
             describeWeatherFiveDay2.html(`
 <ul>
 <li><img src="http://openweathermap.org/img/wn/${data.list[11].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[1]}°C</li>
-  <li>Wind Speed: ${data.list[11].wind.speed}m/s</li>
+  <li>Wind Speed: ${mpsToKmph(data.list[11].wind.speed)} km/h</li>
   <li>Wind Direction: ${data.list[11].wind.deg}°</li>
-  <li>Wind Gust: ${data.list[11].wind.gust}m/s</li>
+  <li>Wind Gust: ${mpsToKmph(data.list[11].wind.gust)} km/h</li>
   <li>Humidity: ${data.list[11].main.humidity}%</li>
 </ul>
 `);
@@ -109,9 +113,9 @@ $(document).ready(function () {
 <ul>
 <li><img src="http://openweathermap.org/img/wn/${data.list[19].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[2]}°C</li>
-  <li>Wind Speed: ${data.list[19].wind.speed}m/s</li>
-  <li>Wind Direction: ${data.list[19].wind.deg}°</li>
-  <li>Wind Gust: ${data.list[19].wind.gust}m/s</li>
+  <li>Wind Speed: ${mpsToKmph(data.list[19].wind.speed)} km/h</li>
+        <li>Wind Direction: ${data.list[19].wind.deg}°</li>
+        <li>Wind Gust: ${mpsToKmph(data.list[19].wind.gust)} km/h</li>
   <li>Humidity: ${data.list[19].main.humidity}%</li>
 </ul>
 `);
@@ -120,9 +124,9 @@ $(document).ready(function () {
 <ul>
 <li><img src="http://openweathermap.org/img/wn/${data.list[27].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[3]}°C</li>
-  <li>Wind Speed: ${data.list[27].wind.speed}m/s</li>
+  <li>Wind Speed: ${mpsToKmph(data.list[27].wind.speed)} km/h</li>
   <li>Wind Direction: ${data.list[27].wind.deg}°</li>
-  <li>Wind Gust: ${data.list[27].wind.gust}m/s</li>
+  <li>Wind Gust: ${mpsToKmph(data.list[27].wind.gust)} km/h</li>
   <li>Humidity: ${data.list[27].main.humidity}%</li>
 </ul>
 `);
@@ -131,9 +135,9 @@ $(document).ready(function () {
 <ul>
 <li><img src="http://openweathermap.org/img/wn/${data.list[35].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[4]}°C</li>
-  <li>Wind Speed: ${data.list[35].wind.speed}m/s</li>
-  <li>Wind Direction: ${data.list[35].wind.deg}°</li>
-  <li>Wind Gust: ${data.list[35].wind.gust}m/s</li>
+  <li>Wind Speed: ${mpsToKmph(data.list[35].wind.speed)} km/h</li>
+        <li>Wind Direction: ${data.list[35].wind.deg}°</li>
+        <li>Wind Gust: ${mpsToKmph(data.list[35].wind.gust)} km/h</li>
   <li>Humidity: ${data.list[35].main.humidity}%</li>
 </ul>
 `);
@@ -148,15 +152,21 @@ $(document).ready(function () {
 
                 // Update the HTML
                 titleElToday.html('Today in ' + oneCallData.name);
+                titleElToday.css({
+                    'font-size': '25px',
+                    'font-weight': 'bold',
+
+                });
+
                 describeWeatherToday.html(`
-        <ul>
-        <li><img src="http://openweathermap.org/img/wn/${oneCallData.weather[0].icon}.png"</li>
-            <li>Temp: ${kelvinToCelsiusRound(oneCallData.main.temp)}°C</li>
-            <li>Wind Speed: ${oneCallData.wind.speed}m/s</li>
-            <li>Wind Direction: ${oneCallData.wind.deg}°</li>
-            <li>Wind Gust: ${oneCallData.wind.gust}m/s</li>
-            <li>Humidity: ${oneCallData.main.humidity}%</li>
-                   </ul>
+                <ul>
+                <li><img src="http://openweathermap.org/img/wn/${oneCallData.weather[0].icon}.png"</li>
+                <li>Temp: ${kelvinToCelsiusRound(oneCallData.main.temp)}°C</li>
+                <li>Wind Speed: ${mpsToKmph(oneCallData.wind.speed)} km/h</li>
+                <li>Wind Direction: ${oneCallData.wind.deg}°</li>
+               
+                <li>Humidity: ${oneCallData.main.humidity}%</li>
+            </ul>
     `);
             });
 
