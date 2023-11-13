@@ -5,11 +5,32 @@ body {
     height: 100vh;
 }
 
+header {
+    text-align: center;
+    margin: 50px 0;
+    margin-top: 150px; 
+}
+
+h1{
+    font-weight: bolder;
+    
+}
+
+h2 {
+    margin-top: 50px;
+}
+
+#five-day-title {
+    text-decoration: underline;
+    font-size: x-large;
+    padding-left: 70px;
+}
+
 #searchForm2 {
     display: flex;
     align-items: center;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 600px;
@@ -22,4 +43,14 @@ body {
 
 .card {
     margin-right: 10px;
+    align-items: center;
+}
+
+.larger-card {
+    width: 26rem;
+    height: 26rem; 
+    margin: 0 auto;
+    margin-top: 40px;
+    padding-top: 25px;
+    font-size: larger;
 }

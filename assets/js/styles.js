@@ -13,7 +13,7 @@ var describeWeatherFiveDay5 = $(`.card-text5`);
 var titleElToday = $(`.card-title-today`);
 var describeWeatherToday = $(`.card-text-today`);
 
-$('#current-day, #five-day-forecast, .navbar').hide();
+$('#current-day, #five-day-forecast, .navbar, #five-day-title').hide();
 
 $(document).ready(function () {
     // Initial AJAX call when the page loads
@@ -36,8 +36,8 @@ $(document).ready(function () {
     $('#searchForm2, #searchForm, .homepage-search').submit(function (event) {
         event.preventDefault();
        
-        $('#current-day, #five-day-forecast, .navbar').show();
-        $(`.homepage-search`).hide();
+        $('#current-day, #five-day-forecast, .navbar, #five-day-title').show();
+        $(`.homepage-search, #welcome`).hide();
 
         var cityName = $(this).find('input[type=search]').val();
         var apiKey = '1ef1dc20327d02db571850d796d5ec80';
