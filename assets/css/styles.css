@@ -1,0 +1,16 @@
+body {
+background-image: url('../images/planes.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100vh;
+}
+
+
+
+#five-day-forecast {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .card {
+    margin-right: 10px; }
