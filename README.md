@@ -31,9 +31,8 @@ https://waltscode.github.io/Module6_Weather_In_Your_City/
 
 
 # Screenshot found below:
-```
-Fun fact: I took the photo in the background when I wan in New Hampshire last month! 
 
-![Alt text](image.png) 
+Fun fact: I took the photo in the background when I was in New Hampshire last month!
 
-```
+
+![Alt text](image.png)
