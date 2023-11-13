@@ -13,6 +13,8 @@ var describeWeatherFiveDay5 = $(`.card-text5`);
 var titleElToday = $(`.card-title-today`);
 var describeWeatherToday = $(`.card-text-today`);
 
+$('#current-day, #five-day-forecast, .navbar').hide();
+
 $(document).ready(function () {
     // Initial AJAX call when the page loads
     var initialApiUrl =
@@ -31,10 +33,13 @@ $(document).ready(function () {
     });
 
     // Form submission event
-    $('#searchForm').submit(function (event) {
+    $('#searchForm2, #searchForm, .homepage-search').submit(function (event) {
         event.preventDefault();
+       
+        $('#current-day, #five-day-forecast, .navbar').show();
+        $(`.homepage-search`).hide();
 
-        var cityName = $('#searchInput').val();
+        var cityName = $(this).find('input[type=search]').val();
         var apiKey = '1ef1dc20327d02db571850d796d5ec80';
         var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`;
         var oneCallApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
@@ -52,6 +57,8 @@ $(document).ready(function () {
             console.log(data.list[3].weather);
             console.log(data.list[3].dt);
             console.log(oneCallApiUrl);
+            console.log(data.list[3].weather.icon);
+          
 
             // create a function that takes the kelvin number and turns it into celsius
             function kelvinToCelsiusRound(kelvin) {
@@ -78,6 +85,7 @@ $(document).ready(function () {
 
             describeWeatherFiveDay1.html(`
 <ul>
+<li><img src="http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[0]}°C</li>
   <li>Wind Speed: ${data.list[3].wind.speed}m/s</li>
   <li>Wind Direction: ${data.list[3].wind.deg}°</li>
@@ -88,6 +96,7 @@ $(document).ready(function () {
 
             describeWeatherFiveDay2.html(`
 <ul>
+<li><img src="http://openweathermap.org/img/wn/${data.list[11].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[1]}°C</li>
   <li>Wind Speed: ${data.list[11].wind.speed}m/s</li>
   <li>Wind Direction: ${data.list[11].wind.deg}°</li>
@@ -98,6 +107,7 @@ $(document).ready(function () {
 
             describeWeatherFiveDay3.html(`
 <ul>
+<li><img src="http://openweathermap.org/img/wn/${data.list[19].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[2]}°C</li>
   <li>Wind Speed: ${data.list[19].wind.speed}m/s</li>
   <li>Wind Direction: ${data.list[19].wind.deg}°</li>
@@ -108,6 +118,7 @@ $(document).ready(function () {
 
             describeWeatherFiveDay4.html(`
 <ul>
+<li><img src="http://openweathermap.org/img/wn/${data.list[27].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[3]}°C</li>
   <li>Wind Speed: ${data.list[27].wind.speed}m/s</li>
   <li>Wind Direction: ${data.list[27].wind.deg}°</li>
@@ -118,6 +129,7 @@ $(document).ready(function () {
 
             describeWeatherFiveDay5.html(`
 <ul>
+<li><img src="http://openweathermap.org/img/wn/${data.list[35].weather[0].icon}.png"</li> 
   <li>Temp: ${temperaturesCelsius[4]}°C</li>
   <li>Wind Speed: ${data.list[35].wind.speed}m/s</li>
   <li>Wind Direction: ${data.list[35].wind.deg}°</li>
@@ -132,17 +144,19 @@ $(document).ready(function () {
                 // TEST
                 console.log('One Call API data:', oneCallData);
                 console.log(oneCallData.name);
+                console.log(oneCallData);
 
                 // Update the HTML
                 titleElToday.html('Today in ' + oneCallData.name);
                 describeWeatherToday.html(`
         <ul>
+        <li><img src="http://openweathermap.org/img/wn/${oneCallData.weather[0].icon}.png"</li>
             <li>Temp: ${kelvinToCelsiusRound(oneCallData.main.temp)}°C</li>
             <li>Wind Speed: ${oneCallData.wind.speed}m/s</li>
             <li>Wind Direction: ${oneCallData.wind.deg}°</li>
             <li>Wind Gust: ${oneCallData.wind.gust}m/s</li>
             <li>Humidity: ${oneCallData.main.humidity}%</li>
-        </ul>
+                   </ul>
     `);
             });
 

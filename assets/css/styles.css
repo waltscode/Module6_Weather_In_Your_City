@@ -1,16 +1,25 @@
 body {
-background-image: url('../images/planes.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100vh;
+    background-image: url('../images/planes.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
-
+#searchForm2 {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+}
 
 #five-day-forecast {
     display: flex;
     justify-content: space-around;
-  }
-  
-  .card {
-    margin-right: 10px; }
+}
+
+.card {
+    margin-right: 10px;
+}
